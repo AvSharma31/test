@@ -1,0 +1,46 @@
+create database sqlAssignment;
+
+use sqlAssignment;
+
+create table AI_Tools(
+ID int,
+technology varchar(20));
+
+insert into AI_Tools values(1, 'DS'),
+(1, 'Tableau'),
+(1, 'SQL'),
+(2, 'R'),
+(2, 'PowerBI'),
+(1, 'Python');
+
+select distinct(id) from AI_Tools where technology in ('DS','Tableau','Python','SQL');
+
+create table product_info(
+pr_ID int ,
+product_name varchar(30),
+primary key(pr_id));
+
+desc product_info;
+
+create table product_info_likes(
+user_id int,
+pr_ID int ,
+liked_date date,
+primary key(pr_id),
+foreign key(pr_ID) references product_info(pr_id));
+
+desc product_info_likes;
+
+insert into product_info values (1001,'Blog'),
+(1002,'Youtube'),
+(1003,'Education');
+
+insert into product_info_likes values(1,1001,'2023-08-19'),
+(2,1003,'2023-01-18');
+
+select * from product_info;
+
+select * from product_info_likes;
+
+select product_info.pr_ID from product_info left outer join product_info_likes 
+on product_info.pr_ID =product_info_likes.pr_ID where product_info_likes.pr_ID is null;
